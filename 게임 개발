@@ -1,0 +1,51 @@
+package practice;
+import java.util.*;
+
+public class bfxc {
+	public static void main(String[] args) {
+		
+		int[][] map = { {1, 1, 1, 1},
+						{1, 0, 0, 1},
+						{1, 1, 0, 1},
+						{1, 1, 1, 1}};
+		
+		int x = 1;
+		int y = 1;
+		
+		int direction = 0;
+		
+		int[] dx = {-1, 0, 1, 0};
+		int[] dy = {0, 1, 0, -1}; //0 : 북 1 : 동 2 : 남 3 : 서
+		
+		map[x][y] = -1;
+		int count = 1;
+		int time = 0;
+		while(true) {
+			
+			if(map[x + dx[direction]][y + dy[direction]] == 0) {
+				x = x + dx[direction];
+				y = y + dy[direction];
+				map[x][y] = -1;
+				time = 0;
+				count++;
+			}
+			else {
+				
+				direction--;
+				if(direction == -1)
+					direction = 3;
+				time++;
+			}
+			//System.out.println(time);
+			if(time == 4) {
+				x = x - dx[direction];
+				y = y - dy[direction];
+				if(map[x][y] == 1)
+					break;
+				else
+					time = 0;
+			}
+		}
+		System.out.println(count);
+	}
+}
